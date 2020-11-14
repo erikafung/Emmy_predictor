@@ -167,7 +167,7 @@ def train_tweets(tweets):
     swn_performance = metrics.classification_report(sentiment, train_sentiment_swn)
     return tweet_df, textblob_acc, textblob_NB_acc, swn_acc, textblob_confusion, textblob_NB_confusion, swn_confusion, textblob_performance, textblob_NB_performance, swn_performance
 
-# get tweets about nominees for lead actress in a comedy series
+# get labelled training set tweets about nominees for lead actress in a comedy series
 tweets = 'comedy_actress_weka.csv'
 tb = Blobber(analyzer=NaiveBayesAnalyzer())
 #perform textblob and swn analysis on training data sets
@@ -307,6 +307,7 @@ print(Ind4)
 # calculate spearman ranking correlation coefficient
 # compare indicators 1 - 4 with IndieWire ranking
 # 1 = Catherine, 2 = Christina, 3 = Issa, 4 = Linda, 5 = Rachel, 6 = Tracee
+# rankings hard coded from indicator outputs
 spear_ind1, p_ind1 = stats.spearmanr([3,1,4,6,2,5], [1,3,5,2,6,4])
 print("Spearman Indicator 1")
 print(spear_ind1, p_ind1)
