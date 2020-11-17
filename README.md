@@ -2,11 +2,11 @@
 
 # Description
 
-This project was created for CS 686 Introduction to AI. It retrieves tweets about 2020 Emmy nominees for outstanding lead actress in a comedy series and performs sentiment analysis using the TextBlob, TextBlob Naive Bayes Analyzer, and SentiWordNet analyzers. Performance metrics for these classifiers are generated for comparison on a labelled training data set. The classifications and accuracy values on the training set are compared using a Chi-square test of independence. The TextBlob analyzer is used to rank the nominees based on four criteria. These four rankings are compared to an industry ranking using the Spearman ranking correlation coefficient. 
+This project was created for CS 686 Introduction to AI. It retrieves tweets about 2020 Emmy nominees for outstanding lead actress in a comedy series and performs sentiment analysis using the TextBlob, TextBlob Naive Bayes Analyzer, and SentiWordNet analyzers. Performance metrics for these classifiers are generated for comparison on a labelled training data set. The classifications and accuracy values on the training set are compared using a Chi-square test of independence. The TextBlob analyzer is used generate sentiments for the test data sets. These sentiments are used to rank the nominees based on four criteria. These four rankings are compared to an industry ranking using the Spearman's rank correlation coefficient. 
 
 # Features
 
-This program utilizes the Twint API to retrieve Twitter data. It also employs the TextBlob, TextBlob Naive Bayes Analyzer, and NLTK SentiWordNet sentiment analyzers. Sklearn metrics and SciPy stats are used to evaluate the performance of the sentiment classifiers.
+This program utilizes the Twint tool to retrieve Twitter data. It also employs the TextBlob, TextBlob Naive Bayes Analyzer, and NLTK SentiWordNet sentiment analyzers. Sklearn metrics and SciPy stats are used to evaluate the performance of the sentiment classifiers.
 
 # Required Libraries
 
@@ -27,7 +27,7 @@ Use the following command to generate a CSV with tweets for a nominee. Specify t
 ```python
 python twint_tweet_retriever.py
 ```
-Use the following command to perform sentiment analysis on a labelled training data set of tweets and to generate rankings of the nominees based on four criteria. The name of the training data set is hard-coded as 'comedy_actress_weka.csv'. This program returns evaluation metrics and statistical tests for the sentiment analyzers on the training data set and rankings of the nominees based on four criteria. Spearman ranking correlation coefficient scores are also returned for each generated ranking, based on comparison with IndieWire's ranking for nominees in the outstanding lead actress in a comedy series category. The hard-coded IndieWire ranking can be replaced with another industry ranking when calculating the Spearman ranking correlation coefficient scores. 
+Use the following command to perform sentiment analysis on a labelled training data set of tweets and to generate rankings of the nominees based on four criteria. The name of the training data set is hard-coded as 'comedy_actress_weka.csv'. This program returns evaluation metrics and statistical tests for the sentiment analyzers on the training data set and rankings of the nominees based on TextBlob sentiment analysis and four criteria. Spearman's rank correlation coefficient scores are also returned for each generated ranking, based on comparison with IndieWire's ranking for nominees in the outstanding lead actress in a comedy series category. The hard-coded IndieWire ranking can be replaced with another industry ranking when calculating the Spearman's rank correlation coefficient scores. 
 
 ```python
 python textblob_swn_analysis.py
