@@ -170,7 +170,7 @@ def train_tweets(tweets):
 # get labelled training set tweets about nominees for lead actress in a comedy series
 tweets = 'comedy_actress_weka.csv'
 tb = Blobber(analyzer=NaiveBayesAnalyzer())
-#perform textblob and swn analysis on training data sets
+# perform textblob and swn analysis on training data sets
 tweet_data_train, textblob_acc, textblob_NB_acc, swn_acc, textblob_confusion, textblob_NB_confusion, swn_confusion, textblob_performance, textblob_NB_performance, swn_performance = train_tweets(tweets)
 tweet_data_train.to_csv("textblob_swn_train.csv")
 # print performance metrics on training data
@@ -189,6 +189,50 @@ print("Textblob NB performance: ")
 print(textblob_NB_performance)
 print("SWN performance: ")
 print(swn_performance)
+
+# calculate p-values for accuracy on training data set
+# textblob and textblob naive bayes
+tb_tbnb = [[textblob_acc, (1-textblob_acc)], [textblob_NB_acc, (1-textblob_NB_acc)]]
+chi2_tbtbnb, pval_tbtbnb, dof_tbtbnb, expected_tbtbnb = stats.chi2_contingency(tb_tbnb)
+print("TextBlob and TextBlob Naive Bayes accuracy p-value: ")
+print(pval_tbtbnb)
+# textblob and sentiwordnet
+tb_swn = [[textblob_acc, (1-textblob_acc)], [swn_acc, (1-swn_acc)]]
+chi2_tbswn, pval_tbswn, dof_tbswn, expected_tbswn = stats.chi2_contingency(tb_swn)
+print("TextBlob and SentiWordNet accuracy p-value: ")
+print(pval_tbswn)
+# textblob naive bayes and sentiwordnet
+swn_tbnb = [[textblob_NB_acc, (1-textblob_NB_acc)], [swn_acc, (1-swn_acc)]]
+chi2_swntbnb, pval_swntbnb, dof_swntbnb, expected_swntbnb = stats.chi2_contingency(swn_tbnb)
+print("SentiWordNet and TextBlob Naive Bayes accuracy p-value: ")
+print(pval_swntbnb)
+# collective
+collective = [[textblob_NB_acc, (1-textblob_NB_acc)], [textblob_acc, (1-textblob_acc)], [swn_acc, (1-swn_acc)]]
+chi2_collective, pval_collective, dof_collective, expected_collective = stats.chi2_contingency(collective)
+print("Collective accuracy p-value: ")
+print(pval_collective)
+# calculate p-values for classifications on training data sets
+# number of instances classified as positive, negative, and neutral by models are hard-coded in from csv results
+# textblob and textblob naive bayes
+tb_tbnb = [[323, 132, 45],[366, 1, 133]]
+chi2_tbtbnb, pval_tbtbnb, dof_tbtbnb, expected_tbtbnb = stats.chi2_contingency(tb_tbnb)
+print("TextBlob and TextBlob Naive Bayes p-value: ")
+print(pval_tbtbnb)
+# textblob and sentiwordnet
+tb_swn = [[323, 132, 45],[65, 415, 20]]
+chi2_tbswn, pval_tbswn, dof_tbswn, expected_tbswn = stats.chi2_contingency(tb_swn)
+print("TextBlob and SentiWordNet p-value: ")
+print(pval_tbswn)
+# textblob naive bayes and sentiwordnet
+swn_tbnb = [[65, 415, 20],[366, 1, 133]]
+chi2_swntbnb, pval_swntbnb, dof_swntbnb, expected_swntbnb = stats.chi2_contingency(swn_tbnb)
+print("SentiWordNet and TextBlob Naive Bayes p-value: ")
+print(pval_swntbnb)
+# collective
+collective = [[65, 415, 20],[366, 1, 133],[323, 132, 45]]
+chi2_collective, pval_collective, dof_collective, expected_collective = stats.chi2_contingency(collective)
+print("Collective p-value: ")
+print(pval_collective)
 
 # perform textblob, textblob naive bayes, and swn analysis on comedy actress data sets
 tweets = 'Catherine_consolidated_tweets.csv'
@@ -307,16 +351,18 @@ print(Ind4)
 # calculate spearman ranking correlation coefficient
 # compare indicators 1 - 4 with IndieWire ranking
 # 1 = Catherine, 2 = Christina, 3 = Issa, 4 = Linda, 5 = Rachel, 6 = Tracee
+# IndieWire ranking
+indiewire = [1,3,5,2,6,4]
 # rankings hard coded from indicator outputs
-spear_ind1, p_ind1 = stats.spearmanr([3,1,4,6,2,5], [1,3,5,2,6,4])
+spear_ind1, p_ind1 = stats.spearmanr([3,1,4,6,2,5], indiewire)
 print("Spearman Indicator 1")
 print(spear_ind1, p_ind1)
-spear_ind2, p_ind2 = stats.spearmanr([3,1,4,6,2,5], [1,3,5,2,6,4])
+spear_ind2, p_ind2 = stats.spearmanr([3,1,4,6,2,5], indiewire)
 print("Spearman Indicator 2")
 print(spear_ind2, p_ind2)
-spear_ind3, p_ind3 = stats.spearmanr([3,1,4,2,6,5], [1,3,5,2,6,4])
+spear_ind3, p_ind3 = stats.spearmanr([3,1,4,2,6,5], indiewire)
 print("Spearman Indicator 3")
 print(spear_ind3, p_ind3)
-spear_ind4, p_ind4 = stats.spearmanr([1,6,2,3,4,5], [1,3,5,2,6,4])
+spear_ind4, p_ind4 = stats.spearmanr([1,6,2,3,4,5], indiewire)
 print("Spearman Indicator 4")
 print(spear_ind4, p_ind4)
