@@ -2,11 +2,11 @@
 
 # Description
 
-This project was created for CS 686 Introduction to AI. It retrieves tweets about 2020 Emmy nominees for outstanding lead actress in a comedy series and performs sentiment analysis using the TextBlob, TextBlob Naive Bayes Analyzer, and SentiWordNet analyzers. Performance metrics for these classifiers are generated for comparison on a labelled training data set. The TextBlob analyzer is used to rank the nominees based on four criteria. These four rankings are compared to an industry ranking using the Spearman ranking correlation coefficient. 
+This project was created for CS 686 Introduction to AI. It retrieves tweets about 2020 Emmy nominees for outstanding lead actress in a comedy series and performs sentiment analysis using the TextBlob, TextBlob Naive Bayes Analyzer, and SentiWordNet analyzers. Performance metrics for these classifiers are generated for comparison on a labelled training data set. The classifications and accuracy values on the training set are compared using a Chi-square test of independence. The TextBlob analyzer is used to rank the nominees based on four criteria. These four rankings are compared to an industry ranking using the Spearman ranking correlation coefficient. 
 
 # Features
 
-This program utilizes the Twint API to retrieve Twitter data. It also employs the TextBlob, TextBlob Naive Bayes Analyzer, and NLTK SentiWordNet sentiment analyzers. Sklearn metrics are used to evaluate the performance of the sentiment classifiers.
+This program utilizes the Twint API to retrieve Twitter data. It also employs the TextBlob, TextBlob Naive Bayes Analyzer, and NLTK SentiWordNet sentiment analyzers. Sklearn metrics and SciPy stats are used to evaluate the performance of the sentiment classifiers.
 
 # Required Libraries
 
@@ -27,7 +27,7 @@ Use the following command to generate a CSV with tweets for a nominee. Specify t
 ```python
 python twint_tweet_retriever.py
 ```
-Use the following command to perform sentiment analysis on a labelled training data set of tweets and to generate rankings of the nominees based on four criteria. The name of the training data set is hard-coded as 'comedy_actress_weka.csv'. This program returns evaluation metrics for the sentiment analyzers on the training data set and rankings of the nominees based on four criteria. Spearman ranking correlation coefficient scores are also returned for each generated ranking, based on comparison with IndieWire's ranking for nominees in the outstanding lead actress in a comedy series category. The hard-coded IndieWire ranking can be replaced with another industry ranking when calculating the Spearman ranking correlation coefficient scores. 
+Use the following command to perform sentiment analysis on a labelled training data set of tweets and to generate rankings of the nominees based on four criteria. The name of the training data set is hard-coded as 'comedy_actress_weka.csv'. This program returns evaluation metrics and statistical tests for the sentiment analyzers on the training data set and rankings of the nominees based on four criteria. Spearman ranking correlation coefficient scores are also returned for each generated ranking, based on comparison with IndieWire's ranking for nominees in the outstanding lead actress in a comedy series category. The hard-coded IndieWire ranking can be replaced with another industry ranking when calculating the Spearman ranking correlation coefficient scores. 
 
 ```python
 python textblob_swn_analysis.py
@@ -101,6 +101,22 @@ SWN performance:
    macro avg       0.42      0.39      0.30       500
 weighted avg       0.57      0.38      0.32       500
 
+TextBlob and TextBlob Naive Bayes accuracy p-value:
+0.21271304421764312
+TextBlob and SentiWordNet accuracy p-value:
+0.2811899206424281
+SentiWordNet and TextBlob Naive Bayes accuracy p-value:
+0.20633157533818944
+Collective accuracy p-value:
+0.944894241990287
+TextBlob and TextBlob Naive Bayes p-value:
+8.945694313996274e-39
+TextBlob and SentiWordNet p-value:
+7.33449413132621e-72
+SentiWordNet and TextBlob Naive Bayes p-value:
+5.806453743639465e-154
+Collective p-value:
+1.5072107277374165e-173
 Indicator 1
 [('Issa', 0.19897032101756512), ('Catherine', 0.09630526953361598), ('Linda', 0.05784373107207753), ('Tracee', 0.043609933373712904), ('Christina', 0.04239854633555421), ('Rachel', 0.015748031496062992)]
 Indicator 2
