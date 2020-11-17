@@ -35,7 +35,7 @@ python textblob_swn_analysis.py
 
 # Example Ouput
 
-```python
+```bash
 python textblob_swn_analysis.py
 
 Textblob accuracy: 0.616
