@@ -211,7 +211,7 @@ collective = [[textblob_NB_acc, (1-textblob_NB_acc)], [textblob_acc, (1-textblob
 chi2_collective, pval_collective, dof_collective, expected_collective = stats.chi2_contingency(collective)
 print("Collective accuracy p-value: ")
 print(pval_collective)
-# calculate p-values for classifications on training data sets
+# calculate p-values for classifications on training data set
 # number of instances classified as positive, negative, and neutral by models are hard-coded in from csv results
 # textblob and textblob naive bayes
 tb_tbnb = [[323, 132, 45],[366, 1, 133]]
